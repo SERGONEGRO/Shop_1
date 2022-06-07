@@ -1,29 +1,15 @@
-﻿@using Shop_1.Data.Models
-@model IEnumerable<Product>
+﻿<!-- всё это подставляется в шаблон _Layout в RenderBody() через ViewStart -->
+
+<h1>Все продукты</h1>
+<h3>@Model.currCategory</h3>
 @{
-    ViewData["Title"] = "List";
-    Layout = null;
+    foreach (var product in Model.AllProducts)
+    {
+        <div>
+            <h2>Наименование: @product.Name</h2>
+            <p>цена: @product.Price.ToString("c")</p>
+            <p>@product.ShortDesc</p>
+        </div>
+    }
 }
-
-<!DOCTYPE html>
-
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width" />
-
-    </head>
-    <body>
-        <h1>Все продукты</h1>
-    @{
-        foreach (var product in Model)
-        {
-            <div>
-                <h2>Наименование: @product.Name</h2>
-                <p>цена: @product.Price.ToString("c")</p>
-            </div>
-        }
-        }
-    </body>
-</html>
-
 

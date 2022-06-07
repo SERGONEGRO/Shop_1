@@ -1,5 +1,8 @@
 ﻿namespace Shop_1.Data.Models
 {
+    /// <summary>
+    /// Модель категории
+    /// </summary>
     public class Category
     {
         public int Id { get; set; }

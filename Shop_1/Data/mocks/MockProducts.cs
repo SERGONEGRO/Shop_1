@@ -3,6 +3,9 @@ using Shop_1.Data.Models;
 
 namespace Shop_1.Data.mocks
 {
+    /// <summary>
+    /// Класс, реализующий интерфейс
+    /// </summary>
     public class MockProducts : IAllProducts
     {
         private readonly IProductsCategory _categoryProducts = new MockCategory();

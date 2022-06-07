@@ -1,5 +1,8 @@
 ﻿namespace Shop_1.Data.Models
 {
+    /// <summary>
+    /// Модель продукта
+    /// </summary>
     public class Product
     {
         public int Id { get; set; }

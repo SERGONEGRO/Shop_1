@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
 
 
 namespace Shop_1
@@ -11,14 +10,12 @@ namespace Shop_1
             CreateWebHostBuilder(args).Build().Run();
         }
 
+        /// <summary>
+        /// указываем, чтобы при запуске использовался файл startup
+        /// </summary>
+        /// <param name="args"></param>
+        /// <returns></returns>
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args).UseStartup<StartUp>();
     }
 }
-
-//var builder = WebApplication.CreateBuilder(args);
-//var app = builder.Build();
-
-//app.MapGet("/", () => "Hello World!");
-
-//app.Run();

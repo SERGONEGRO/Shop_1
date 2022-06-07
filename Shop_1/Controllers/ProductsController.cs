@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shop_1.Data.Interfaces;
+using Shop_1.ViewModels;
 
 namespace Shop_1.Controllers
 {
@@ -19,8 +20,13 @@ namespace Shop_1.Controllers
 
         public ViewResult List()
         {
-            var products = _allProducts.Products;
-            return View(products);
+            ViewBag.Title = "Страница с товарами";   //title можно передавать во viewbag
+            //создаем и передаем 1 объект вместо нескольких
+            ProductsListViewModel obj = new ProductsListViewModel();
+            obj.AllProducts = _allProducts.Products;
+            obj.currCategory = "Мед свежий из пизды медвежьей";
+          
+            return View(obj);
         }
     }
 }
