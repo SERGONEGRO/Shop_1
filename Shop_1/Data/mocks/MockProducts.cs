@@ -4,7 +4,7 @@ using Shop_1.Data.Models;
 namespace Shop_1.Data.mocks
 {
     /// <summary>
-    /// Класс, реализующий интерфейс
+    /// Класс для работы без БД, реализующий интерфейс
     /// </summary>
     public class MockProducts : IAllProducts
     {
