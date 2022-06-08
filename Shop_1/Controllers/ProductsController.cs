@@ -24,7 +24,7 @@ namespace Shop_1.Controllers
             //создаем и передаем 1 объект вместо нескольких
             ProductsListViewModel obj = new ProductsListViewModel();
             obj.AllProducts = _allProducts.Products;
-            obj.currCategory = "Мед свежий из пизды медвежьей";
+            obj.currCategory = "Мед свежий из берлоги медвежьей";
           
             return View(obj);
         }

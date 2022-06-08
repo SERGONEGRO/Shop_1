@@ -20,10 +20,16 @@ namespace Shop_1.Data
         /// Получает все товары в магазине
         /// </summary>
         public DbSet<Product> Product { get; set; }
+
         /// <summary>
         /// Получает все категории
         /// </summary>
         public DbSet<Category> Category { get; set; }
+
+        /// <summary>
+        /// Получает все элементы корзины
+        /// </summary>
+        public DbSet<ShopCartItem> ShopCartItem { get; set; }
     }
    
 }

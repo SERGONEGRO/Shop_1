@@ -66,9 +66,7 @@ namespace Shop_1.Data
             }
 
             //сохраняем изменения
-            content.SaveChanges();
-                
-               
+            content.SaveChanges(); 
         }
         
 
