@@ -54,7 +54,7 @@ namespace Shop_1.Data.mocks
                         IsFavourite = true,
                         Available = true,
                         Category = _categoryProducts.AllCategories.Last()
-                    },
+                    }
                 };
             }
         

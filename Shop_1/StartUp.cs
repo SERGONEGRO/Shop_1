@@ -2,6 +2,7 @@
 using Shop_1.Data.Interfaces;
 using Shop_1.Data.mocks;
 using Microsoft.EntityFrameworkCore;
+using Shop_1.Data.Repository;
 
 namespace Shop_1
 {
@@ -26,9 +27,13 @@ namespace Shop_1
             //указываем, какой использовать sql-сервер, с помощью переменной, в которой хранятся настройки из файла 
             services.AddDbContext<AppDBContent>(options => options.UseSqlServer(_confstring.GetConnectionString("DefaultConnection")));
 
-            //связываем интерфейс с классом, реализующим этот интерфейс
-            services.AddTransient<IAllProducts,MockProducts>();
-            services.AddTransient<IProductsCategory, MockCategory>();
+            /*---связываем интерфейс с классом, реализующим этот интерфейс---*/
+            //для работы без БД используем моксы
+            //services.AddTransient<IAllProducts,MockProducts>(); 
+            //services.AddTransient<IProductsCategory, MockCategory>();
+            //для работы с БД используем repository
+            services.AddTransient<IAllProducts, ProductRepository>();
+            services.AddTransient<IProductsCategory, CategoryRepository>();
 
             services.AddMvc();
          
@@ -47,7 +52,14 @@ namespace Shop_1
             {
                 endpoints.MapControllerRoute("default","{controller=Home}/{action=Index}");
             });
-            
+
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                //подключаем AppDBContent, чтобы на основе него подключаться к БД
+                AppDBContent content = scope.ServiceProvider.GetRequiredService<AppDBContent>();
+                DBObjects.Initial(content);
+            }
+
         }
     }
 }

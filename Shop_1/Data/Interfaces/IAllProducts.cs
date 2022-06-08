@@ -8,7 +8,7 @@ namespace Shop_1.Data.Interfaces
     public interface IAllProducts
     {
         IEnumerable<Product> Products { get; }
-        IEnumerable<Product> GetFavProduct { get; set; }
+        IEnumerable<Product> GetFavProduct { get; }
         Product GetObjectProduct(int productId);
     }
 }
