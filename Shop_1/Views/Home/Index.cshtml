@@ -1,0 +1,13 @@
+﻿@model HomeViewModel
+
+<h1 class="test" >Хиты продаж:</h1>
+<div class="row mt-5 mb-2">
+    @{
+        foreach (Product product in Model.FavProducts)
+        {
+            <!--вызов шаблона AllProducts -->
+            @Html.Partial("AllProducts", product)
+        }
+    }
+</div>
+
