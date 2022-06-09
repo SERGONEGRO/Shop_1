@@ -10,7 +10,7 @@
         /// </summary>
         public int Id { get; set; }
         public Product Product { get; set; }
-        public int price { get; set; }
+        public int Price { get; set; }
 
         /// <summary>
         /// Id корзины, к кторой прикреплен итем

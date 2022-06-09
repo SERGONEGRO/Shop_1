@@ -3,6 +3,7 @@ using Shop_1.Data.Interfaces;
 using Shop_1.Data.mocks;
 using Microsoft.EntityFrameworkCore;
 using Shop_1.Data.Repository;
+using Shop_1.Data.Models;
 
 namespace Shop_1
 {
@@ -11,7 +12,10 @@ namespace Shop_1
 
         private IConfigurationRoot _confstring;
 
-        //конструктор
+        /// <summary>
+        /// конструктор
+        /// </summary>
+        /// <param name="hostEnv"></param>
         public StartUp(Microsoft.AspNetCore.Hosting.IHostingEnvironment hostEnv) {
             //записываем в переменную файл с строкой подключения, чтобы потом добавить его в сервисы
             _confstring = new ConfigurationBuilder().SetBasePath(hostEnv.ContentRootPath).AddJsonFile("dbsettings.json").Build();
@@ -35,7 +39,18 @@ namespace Shop_1
             services.AddTransient<IAllProducts, ProductRepository>();
             services.AddTransient<IProductsCategory, CategoryRepository>();
 
+            //Позволяет работать с сессиями
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
+            //делает так, что для разных пользователей выдается разная корзина
+            services.AddScoped(sp => ShopCart.GetCart(sp));
+
             services.AddMvc();
+
+            //добавляем использование кэша
+            services.AddMemoryCache();
+            //добавляем сессии
+            services.AddSession();
          
         }
 
@@ -45,6 +60,8 @@ namespace Shop_1
             app.UseDeveloperExceptionPage();
             app.UseStatusCodePages();
             app.UseStaticFiles();
+            //используем сессии
+            app.UseSession();
             //app.UseMvcWithDefaultRoute(); устарело
             app.UseRouting();
             app.UseCors();
