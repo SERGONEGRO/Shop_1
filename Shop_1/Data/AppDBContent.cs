@@ -12,9 +12,7 @@ namespace Shop_1.Data
         /// Конструктор по умолчанию. Получает данные и передает в базовый конструктор
         /// </summary>
         /// <param name="options"></param>
-        public AppDBContent(DbContextOptions<AppDBContent> options) : base(options){
-
-        }
+        public AppDBContent(DbContextOptions<AppDBContent> options) : base(options){ }
 
         /// <summary>
         /// Получает все товары в магазине
@@ -30,6 +28,16 @@ namespace Shop_1.Data
         /// Получает все элементы корзины
         /// </summary>
         public DbSet<ShopCartItem> ShopCartItem { get; set; }
+
+        /// <summary>
+        /// Получает все элементы заказов
+        /// </summary>
+        public DbSet<Order> Order { get; set; }
+
+        /// <summary>
+        /// Получает все элементы "детали заказа"
+        /// </summary>
+        public DbSet<OrderDetail> OrderDetail { get; set; }
     }
    
 }

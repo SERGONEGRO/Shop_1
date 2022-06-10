@@ -38,6 +38,7 @@ namespace Shop_1
             //для работы с БД используем repository
             services.AddTransient<IAllProducts, ProductRepository>();
             services.AddTransient<IProductsCategory, CategoryRepository>();
+            services.AddTransient<IAllOrders, OrdersRepository>();
 
             //Позволяет работать с сессиями
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
