@@ -45,12 +45,14 @@ namespace Shop_1
             //делает так, что для разных пользователей выдается разная корзина
             services.AddScoped(sp => ShopCart.GetCart(sp));
 
-            services.AddMvc();
+            //используем MVC с отключенным роутингом, поскольку ругается (из-за устаревшей версии)
+            services.AddMvc(options => options.EnableEndpointRouting = false);
 
             //добавляем использование кэша
             services.AddMemoryCache();
             //добавляем сессии
             services.AddSession();
+
          
         }
 
@@ -65,9 +67,17 @@ namespace Shop_1
             //app.UseMvcWithDefaultRoute(); устарело
             app.UseRouting();
             app.UseCors();
-            app.UseEndpoints(endpoints =>
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapControllerRoute("default","{controller=Home}/{action=Index}");
+            //});
+            
+            //добавляем маршруты
+            app.UseMvc(routes =>
             {
-                endpoints.MapControllerRoute("default","{controller=Home}/{action=Index}");
+                routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute(name: "categoryFilter", template: "Products/{action}/{category?}",
+                    defaults: new { Controller = "Products", action = "List" });
             });
 
             using (var scope = app.ApplicationServices.CreateScope())
